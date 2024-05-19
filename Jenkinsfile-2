@@ -17,7 +17,7 @@ pipeline {
                 $PROCESOS | Select -last 2 |
                     Add-Content -Path archivo.txt
                 '''
-                sh 'cat archivo.txt'
+                pwsh 'Get-Content -Path archivo.txt'
             }
         }
     }
