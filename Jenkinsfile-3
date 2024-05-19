@@ -1,0 +1,22 @@
+pipeline {
+    agent none
+
+    stages {
+        // esta fase no se ejecuta porque no tiene un agent definido 
+        stage('Limpiar Workspace') {
+            steps {
+                // usando el intérprete de comandos pwsh
+                pwsh 'Remove-Item -Path ./*'
+            }
+        }
+
+        stage('Crear el fichero') {
+            // definimos un nodo en que esta fase debe ejecutarse
+            agent any
+
+            steps {
+                sh 'ls'
+            }
+        }
+    }
+}

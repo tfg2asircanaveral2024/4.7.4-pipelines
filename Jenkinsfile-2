@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Limpiar Workspace') {
+            steps {
+                // usando el intérprete de comandos pwsh
+                pwsh 'Remove-Item -Path ./*'
+            }
+        }
+
+        stage('Crear el fichero') {
+            steps {
+                // usamos un script de Powershell
+                pwsh '''
+                $PROCESOS=Get-Process | ConvertTo-Csv
+                $PROCESOS | Select -last 2 |
+                    Add-Content -Path archivo.txt
+                '''
+                sh 'cat archivo.txt'
+            }
+        }
+    }
+}
