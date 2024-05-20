@@ -4,10 +4,10 @@ pipeline {
     stages {
         // esta fase no se ejecuta porque no tiene un agent definido 
         stage('Limpiar Workspace') {
+            // esta fase debe ejecutarse en el nodo por defecto
+            agent any
+            
             steps {
-                // esta fase debe ejecutarse en el nodo por defecto
-                agent any
-
                 pwsh 'Remove-Item -Path ./*'
             }
         }
